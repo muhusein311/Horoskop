@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aplikasi Horoskop & Weton Jawa</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Aplikasi Cek Horoskop & Weton</h1>
+<p>Masukkan tanggal lahir anda</p>
+
+<input type="date" id="tgl">
+
+<br><br>
+
+<button onclick="hitung()">Cek Sekarang</button>
+
+<div id="hasil"></div>
+
+</div>
+
+<script>
+
+function hitung(){
+
+let tanggal=document.getElementById("tgl").value;
+
+if(tanggal==""){
+alert("Masukkan tanggal lahir");
+return;
+}
+
+let t=new Date(tanggal);
+
+let tgl=t.getDate();
+let bln=t.getMonth()+1;
+
+let zodiac="";
+let gambar="";
+
+if((tgl>=21 && bln==3)||(tgl<=19 && bln==4)){
+zodiac="Aries"; gambar="aries.png";
+}
+
+else if((tgl>=20 && bln==4)||(tgl<=20 && bln==5)){
+zodiac="Taurus"; gambar="taurus.png";
+}
+
+else if((tgl>=21 && bln==5)||(tgl<=20 && bln==6)){
+zodiac="Gemini"; gambar="gemini.png";
+}
+
+else if((tgl>=21 && bln==6)||(tgl<=22 && bln==7)){
+zodiac="Cancer"; gambar="cancer.png";
+}
+
+else if((tgl>=23 && bln==7)||(tgl<=22 && bln==8)){
+zodiac="Leo"; gambar="leo.png";
+}
+
+else if((tgl>=23 && bln==8)||(tgl<=22 && bln==9)){
+zodiac="Virgo"; gambar="virgo.png";
+}
+
+else if((tgl>=23 && bln==9)||(tgl<=22 && bln==10)){
+zodiac="Libra"; gambar="libra.png";
+}
+
+else if((tgl>=23 && bln==10)||(tgl<=21 && bln==11)){
+zodiac="Scorpio"; gambar="scorpio.png";
+}
+
+else if((tgl>=22 && bln==11)||(tgl<=21 && bln==12)){
+zodiac="Sagittarius"; gambar="sagittarius.png";
+}
+
+else if((tgl>=22 && bln==12)||(tgl<=19 && bln==1)){
+zodiac="Capricorn"; gambar="capricorn.png";
+}
+
+else if((tgl>=20 && bln==1)||(tgl<=18 && bln==2)){
+zodiac="Aquarius"; gambar="aquarius.png";
+}
+
+else{
+zodiac="Pisces"; gambar="pisces.png";
+}
+
+let hariList=["minggu","senin","selasa","rabu","kamis","jumat","sabtu"];
+
+let hari=hariList[t.getDay()];
+
+let pasaranList=["legi","pahing","pon","wage","kliwon"];
+
+let base=new Date("1938-01-01");
+
+let selisih=Math.floor((t-base)/86400000);
+
+let pasaran=pasaranList[selisih%5];
+
+let hasil=`
+<div class="hasil">
+
+<h2>Hasil Perhitungan</h2>
+
+<h3>Zodiac Anda</h3>
+<img src="img/${gambar}">
+<p>${zodiac}</p>
+
+<h3>Hari Jawa</h3>
+<img src="img/${hari}.png">
+<p>${hari}</p>
+
+<h3>Pasaran Jawa</h3>
+<img src="img/${pasaran}.png">
+<p>${pasaran}</p>
+
+<h3>Weton</h3>
+<p><b>${hari} ${pasaran}</b></p>
+
+</div>
+`;
+
+document.getElementById("hasil").innerHTML=hasil;
+
+}
+
+</script>
+
+</body>
+</html>
